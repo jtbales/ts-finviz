@@ -1,8 +1,8 @@
 {
     "name": "ts-finviz",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Stock quotes and company data from Finviz - the Typescript edition",
-    "main": "index.js",
+    "main": "index.ts",
     "scripts": {
         "build": "tsc",
         "test": "jest index"
