@@ -1,18 +1,22 @@
 # finviz
-Stock quotes and company data from Finviz
+
+Stock quotes and company data from Finviz - the TypeScript edition
 
 ## Install
+
 ```
-$ npm install finviz --save
+$ npm install ts-finviz --save
 ```
 
 ## Usage
-```javascript
-var finviz = require('finviz');
 
-finviz.getStockData("MSFT")
-  .then(data => console.log(JSON.stringify(data, null, 2)))
-  .catch(err => console.error(err.stack ? err.stack : err));
+```javascript
+import * as finviz from 'finviz';
+
+finviz
+    .getStockData('MSFT')
+    .then(data => console.log(JSON.stringify(data, null, 2)))
+    .catch(err => console.error(err.stack ? err.stack : err));
 
 /*
 {
@@ -93,4 +97,5 @@ finviz.getStockData("MSFT")
 ```
 
 ## License
+
 MIT license; see [LICENSE](./LICENSE).
