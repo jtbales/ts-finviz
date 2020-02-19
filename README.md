@@ -1,4 +1,5 @@
-# finviz
+# ts-finviz
+![Master Build](https://github.com/RhysWilliams12/ts-finviz/workflows/Master%20Build/badge.svg)
 
 Stock quotes and company data from Finviz - the TypeScript edition
 
