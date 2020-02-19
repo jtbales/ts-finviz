@@ -5,7 +5,9 @@ afterEach(() => {
 })
 
 describe('Finviz Test Suite', () => {
-    expect(true).toBeTruthy();
+    it('should pass', () => {
+        expect(true).toBeTruthy();
+    });
     // works on my machine
     // it('should fetch stock data', async () => {
     //     const result = await Finviz.getStockData('AAPL');
