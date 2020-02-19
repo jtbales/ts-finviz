@@ -8,7 +8,7 @@ describe('Finviz Test Suite', () => {
     it('should pass', () => {
         expect(true).toBeTruthy();
     });
-    // works on my machine
+    // works on my machine - test timing out
     // it('should fetch stock data', async () => {
     //     const result = await Finviz.getStockData('AAPL');
     //     expect(result).toBeDefined();
