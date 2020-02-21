@@ -11,9 +11,33 @@ $ npm install ts-finviz --save
 ## Usage
 
 ```javascript
-import * as finviz from 'finviz';
+import { Finviz, FinVizObject, FinVizAttribute } from 'ts-finviz';
 
-finviz
+async fetchAllFinvizData(ticker: string): Promise<FinVizObject>{
+  return Finviz.getStockData(ticker);
+}
+
+async fetchSelectedFinvizData(ticker: string, attributes: FinVizAttribute[]): Promise<FinVizObject>{
+  const finvizFullStockData : FinVizObject = await fetchAllFinvizData(ticker);
+  return attirbutes.reduce((acc,attr)=>{
+    acc[attr] = finvizFullStockData[attribute]
+    return acc;
+  },{});
+}
+
+this.fetchSelectedFinvizData('MSFT',[FinVizAttribute.CASH_SHARES,FinVizAttribute.PE,FinVizAttribute.PRICE]).then((data: FinVizObject)=>{
+  console.log(data);
+});
+/*
+  FinVizObject: {
+    "Cash/sh": "17.81",
+    "P/E": "34.11",
+    "Price": "184.42"
+  }
+*/
+
+
+Finviz
     .getStockData('MSFT')
     .then(data => console.log(JSON.stringify(data, null, 2)))
     .catch(err => console.error(err.stack ? err.stack : err));

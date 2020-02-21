@@ -1,10 +1,30 @@
-declare module 'finviz' {
+// Type definitions for ts-finviz 0.1.0
+// Project: ts-finviz
+// Definitions by: Rhys Williams https://github.com/RhysWilliams12
+
+/** 
+ * A namespace for the ts-finviz npm module
+*/
+export namespace tsFinviz {
+    /**
+     * Type defenition for the finviz stock data that is returned. This stock data is displayed on the [Finviz](https://finviz.com/quote.ashx) website.
+     */
     export type FinVizObject = { [key: string]: string };
 
+    /**
+     * A Function that fetches stock data for a particular stock.
+     * @param symbol The stock ticker/symbol used to reference this stock on an exchange.
+     * @param attributes (Optional) a list of attributes that can be passed in to filter the stock data.
+     * @event Error throws an execption when stock data can't be retrieved.
+     * @returns A promise which can be resolved that contains the relevant stock data.
+     */
     export class Finviz {
-        getStockData(input: string): Promise<FinVizObject>;
+        getStockData(symbol: string, attributes?: FinVizAttribute[]): Promise<FinVizObject>;
     }
 
+    /**
+     * An enumeration for the data fields that is shown on the [Finviz](https://finviz.com/quote.ashx) website.
+     */
     export enum FinVizAttribute {
         ATR = 'ATR',
         AVARAGE_VOLUME = 'Avg Volume',

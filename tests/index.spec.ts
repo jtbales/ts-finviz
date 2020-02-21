@@ -1,25 +1,37 @@
-import { Finviz } from '../index';
+import { Finviz, FinVizAttribute } from '../index';
 
 afterEach(() => {
     jest.resetAllMocks();
 })
 
 describe('Finviz Test Suite', () => {
-    it('should pass', () => {
-        expect(true).toBeTruthy();
+    it('should contain expected attributes', () => {
+        Object.values(FinVizAttribute).forEach((value: string, index) => {
+            expect(value).toEqual(expectedAttrs[index])
+        });
     });
+
     // works on my machine - test timing out
-    // it('should fetch stock data', async () => {
-    //     const result = await Finviz.getStockData('AAPL');
-    //     expect(result).toBeDefined();
-    //     Object.keys(result).forEach((key, index) => {
-    //         expect(key).toEqual(expectedAttr.find(entry => entry === key))
-    //         expect(result[key]).toBeDefined();
-    //     });
-    // });
+    it('should fetch stock data', async () => {
+        const result = await Finviz.getStockData('AAPL');
+        expect(result).toBeDefined();
+        Object.keys(result).forEach((key, index) => {
+            expect(key).toEqual(expectedAttrs.find(entry => entry === key))
+            expect(result[key]).toBeDefined();
+        });
+    });
+
+    it('should fetch stock data', async () => {
+        const result = await Finviz.getStockData('AAPL', [FinVizAttribute.PRICE]);
+        expect(result).toBeDefined();
+        Object.keys(result).forEach((key, index) => {
+            expect(key).toEqual(expectedAttrs.find(entry => entry === key))
+            expect(result[key]).toBeDefined();
+        });
+    });
 });
 
-const expectedAttr: string[] = [
+const expectedAttrs: string[] = [
     'ATR',
     'Avg Volume',
     'Beta',
