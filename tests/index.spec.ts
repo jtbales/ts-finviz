@@ -1,6 +1,7 @@
 import { Finviz, FinVizAttribute } from '../index';
 
 afterEach(() => {
+    jest.setTimeout(10000)
     jest.resetAllMocks();
 })
 
