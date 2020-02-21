@@ -22,12 +22,13 @@ describe('Finviz Test Suite', () => {
     });
 
     it('should fetch stock data', async () => {
-        const result = await Finviz.getStockData('AAPL', [FinVizAttribute.PRICE]);
+        const expectedSelectedAttributes = [FinVizAttribute.PRICE];
+        const result = await Finviz.getStockData('AAPL', expectedSelectedAttributes);
         expect(result).toBeDefined();
-        Object.keys(result).forEach((key, index) => {
-            expect(key).toEqual(expectedAttrs.find(entry => entry === key))
-            expect(result[key]).toBeDefined();
-        });
+        expectedSelectedAttributes.forEach(attr => {
+            expect(result[attr]).toBeDefined();
+        })
+
     });
 });
 
