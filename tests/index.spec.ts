@@ -1,4 +1,4 @@
-import { Finviz, FinVizAttribute } from '../index';
+import { Finviz, FinVizAttribute } from '../src/index';
 
 afterEach(() => {
     jest.setTimeout(10000)
