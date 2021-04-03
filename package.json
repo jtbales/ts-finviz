@@ -10,6 +10,8 @@
     "test": "jest index --detectOpenHandles"
   },
   "type": "module",
+  "types": "./@types/index.d.ts",
+  "typings": "./@types/index.d.ts",
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/mjs/index.js",
   "exports": {
