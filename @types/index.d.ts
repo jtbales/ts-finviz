@@ -15,8 +15,8 @@ export declare class Finviz {
     static getStockData(symbol: string, attributes?: FinVizAttribute[]): Promise<FinVizObject>;
 }
 /**
-* An enumeration for the data fields that is shown on the [Finviz](https://finviz.com/quote.ashx) website.
-*/
+ * An enumeration for the data fields that is shown on the [Finviz](https://finviz.com/quote.ashx) website.
+ */
 export declare enum FinVizAttribute {
     ATR = "ATR",
     AVARAGE_VOLUME = "Avg Volume",
@@ -77,7 +77,7 @@ export declare enum FinVizAttribute {
     SALES_PAST_5Y = "Sales past 5Y",
     SALES_QQ = "Sales Q/Q",
     SHARES_FLOATING = "Shs Float",
-    SHARES_OUSTANDING = "Shs Outstand",
+    SHARES_OUTSTANDING = "Shs Outstand",
     SHORT_FLOATING = "Short Float",
     SHORT_RATIO = "Short Ratio",
     SHORTABLE = "Shortable",

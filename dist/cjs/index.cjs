@@ -29,22 +29,22 @@ class Finviz {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             // Convert symbols like BRK.B to BRK-B
-            symbol = symbol.replace(/\./g, '-');
+            symbol = symbol.replace(/\./g, "-");
             let companyData = {};
-            const browser = yield puppeteer.launch({ args: ['--no-sandbox'] });
+            const browser = yield puppeteer.launch({ args: ["--no-sandbox"] });
             const page = yield browser.newPage();
-            yield page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3205.0 Safari/537.36');
+            yield page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3205.0 Safari/537.36");
             yield page.setRequestInterception(true);
-            page.on('request', request => {
-                if (request.resourceType() === 'image' ||
-                    request.resourceType() === 'stylesheet' ||
-                    request.resourceType() === 'font' ||
-                    request.resourceType() === 'media') {
+            page.on("request", (request) => {
+                if (request.resourceType() === "image" ||
+                    request.resourceType() === "stylesheet" ||
+                    request.resourceType() === "font" ||
+                    request.resourceType() === "media") {
                     //console.log("BLOCK: " + request.resourceType() + "@" + request.url());
                     request.abort();
                 }
-                else if (request.resourceType() === 'script' ||
-                    request.resourceType() === 'xhr') {
+                else if (request.resourceType() === "script" ||
+                    request.resourceType() === "xhr") {
                     if (request.url().search(/:\/\/.*finviz\.com\//) !== -1) {
                         //console.log("ALLOW: " + request.resourceType() + "@" + request.url());
                         request.continue();
@@ -54,7 +54,7 @@ class Finviz {
                         request.abort();
                     }
                 }
-                else if (request.resourceType() === 'document') {
+                else if (request.resourceType() === "document") {
                     //console.log("ALLOW: " + request.resourceType() + "@" + request.url());
                     request.continue();
                 }
@@ -66,22 +66,22 @@ class Finviz {
             //page.on('console', msg => console.log('PAGE_LOG:', msg.text));
             try {
                 yield page.goto(`https://finviz.com/quote.ashx?t=${symbol}`);
-                const selector = '.snapshot-table2 tbody tr td';
+                const selector = ".snapshot-table2 tbody tr td";
                 yield page.waitForSelector(selector, { timeout: 9000 });
-                let pageData = yield page.evaluate(() => {
+                let pageData = (yield page.evaluate(() => {
                     // Line 1
-                    var tableRoot = document.getElementsByClassName('snapshot-table2'); // Line 2
-                    var tableBody = tableRoot[0].getElementsByTagName('tbody'); // ....
-                    var tableRows = tableBody[0].getElementsByTagName('tr');
+                    var tableRoot = document.getElementsByClassName("snapshot-table2"); // Line 2
+                    var tableBody = tableRoot[0].getElementsByTagName("tbody"); // ....
+                    var tableRows = tableBody[0].getElementsByTagName("tr");
                     var companyData = [];
                     for (var idx = 0; idx < tableRows.length; idx++) {
-                        var tableData = tableRows[idx].getElementsByTagName('td');
+                        var tableData = tableRows[idx].getElementsByTagName("td");
                         for (var jdx = 0; jdx < tableData.length; jdx++) {
                             companyData.push(tableData[jdx].textContent);
                         }
                     }
                     return companyData;
-                }, symbol);
+                }, symbol));
                 for (let i = 0; i < pageData.length; i += 2) {
                     const key = pageData[i];
                     const value = pageData[i + 1];
@@ -89,7 +89,7 @@ class Finviz {
                         companyData[key] = value;
                     }
                     else {
-                        companyData[key + ' %'] = value;
+                        companyData[key + " %"] = value;
                     }
                 }
                 if ((_a = attributes) === null || _a === void 0 ? void 0 : _a.length) {
@@ -108,12 +108,11 @@ class Finviz {
             throw new Error(`unable to fetch data for ${symbol}`);
         });
     }
-    ;
 }
 exports.Finviz = Finviz;
 /**
-* An enumeration for the data fields that is shown on the [Finviz](https://finviz.com/quote.ashx) website.
-*/
+ * An enumeration for the data fields that is shown on the [Finviz](https://finviz.com/quote.ashx) website.
+ */
 var FinVizAttribute;
 (function (FinVizAttribute) {
     FinVizAttribute["ATR"] = "ATR";
@@ -175,7 +174,7 @@ var FinVizAttribute;
     FinVizAttribute["SALES_PAST_5Y"] = "Sales past 5Y";
     FinVizAttribute["SALES_QQ"] = "Sales Q/Q";
     FinVizAttribute["SHARES_FLOATING"] = "Shs Float";
-    FinVizAttribute["SHARES_OUSTANDING"] = "Shs Outstand";
+    FinVizAttribute["SHARES_OUTSTANDING"] = "Shs Outstand";
     FinVizAttribute["SHORT_FLOATING"] = "Short Float";
     FinVizAttribute["SHORT_RATIO"] = "Short Ratio";
     FinVizAttribute["SHORTABLE"] = "Shortable";
