@@ -1,49 +1,60 @@
 {
-    "name": "ts-finviz",
-    "version": "0.1.1",
-    "description": "Stock quotes and company data from Finviz - the Typescript edition",
-    "main": "index.ts",
-    "scripts": {
-        "build": "tsc",
-        "test": "jest index --detectOpenHandles"
+  "name": "ts-finviz",
+  "version": "0.1.1",
+  "description": "Stock quotes and company data from Finviz - the Typescript edition",
+  "scripts": {
+    "build": "npm run clean && npm i && npm run build:cjs && npm run build:mjs",
+    "clean": "rimraf dist @types",
+    "build:mjs": "tsc --outDir dist/mjs --allowSyntheticDefaultImports -d --declarationDir @types --module esnext --target esnext",
+    "build:cjs": "tsc --outDir dist/cjs --esModuleInterop --moduleResolution node  --module CommonJS --target ES2015 -d false && map dist/cjs js cjs",
+    "test": "jest index --detectOpenHandles"
+  },
+  "type": "module",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/mjs/index.js",
+  "exports": {
+    "import": "./dist/mjs/index.js",
+    "require": "./dist/cjs/index.cjs"
+  },
+  "files": [
+    "dist/",
+    "@types/"
+  ],
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
     },
-    "jest": {
-        "transform": {
-            ".(ts|tsx)": "ts-jest"
-        },
-        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js"
-        ]
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/RhysWilliams12/ts-finviz.git"
-    },
-    "keywords": [
-        "stock",
-        "quotes",
-        "financial",
-        "data",
-        "finviz"
-    ],
-    "author": "bitquant",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/RhysWilliams12/ts-finviz/issues"
-    },
-    "homepage": "https://github.com/RhysWilliams12/ts-finviz#readme",
-    "dependencies": {
-        "@types/puppeteer": "^2.0.0",
-        "puppeteer": "1.18.1"
-    },
-    "devDependencies": {
-        "@types/jest": "^25.1.2",
-        "@types/node": "^13.7.0",
-        "jest": "^25.1.0",
-        "ts-jest": "^25.2.0",
-        "typescript": "^3.7.5"
-    }
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtbales/ts-finviz.git"
+  },
+  "keywords": [
+    "stock",
+    "quotes",
+    "financial",
+    "data",
+    "finviz"
+  ],
+  "author": "jtbales",
+  "license": "MIT",
+  "dependencies": {
+    "@master-chief/map": "^0.0.6",
+    "@types/puppeteer": "^2.0.0",
+    "puppeteer": "1.18.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.2",
+    "@types/node": "^13.7.0",
+    "jest": "^25.1.0",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^25.2.0",
+    "typescript": "^3.7.5"
+  }
 }
